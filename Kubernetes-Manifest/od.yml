@@ -23,7 +23,7 @@ spec:
         - name: ADMIN_PASSWORD
           value: "OD_Password"
         - name: DB_CONNECTION_STRING
-          value: "Server=tcp:octopussqlprod.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=mike;Password=SecreTP@assw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+          value: "Server=tcp:db_name.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=server_username;Password=db_password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
         ports:
         - containerPort: 8080
         volumeMounts:
