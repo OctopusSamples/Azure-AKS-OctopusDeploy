@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octopusdeploy
+spec:
+  selector:
+    matchLabels:
+      app: octopusdeploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: octopusdeploy
+    spec:
+      containers:
+      - name: octopusdeploy
+        image: octopusdeploy/octopusdeploy:latest
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: ADMIN_USERNAME
+          value: "admin"
+        - name: ADMIN_PASSWORD
+          value: "OD_Password"
+        - name: DB_CONNECTION_STRING
+          value: "Server=tcp:octopussqlprod.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=mike;Password=SecreTP@assw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: tasklogs
+            mountPath: /taskLogs
+          - name: artifacts
+            mountPath: /artifacts
+          - name: repository
+            mountPath: /repository
+      volumes:
+        - name: tasklogs
+          emptyDir: {}
+        - name: artifacts
+          emptyDir: {}
+        - name: repository
+          emptyDir: {}
+          
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octopusdeploy
+spec:
+  selector:
+    app: octopusdeploy
+  ports:
+    - port: 8080
+  type: LoadBalancer
