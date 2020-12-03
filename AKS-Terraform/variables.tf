@@ -15,5 +15,5 @@ variable "keyvaultID" {
 
 variable "location" {
     type = string
-    description = "Regio"
+    description = "Region"
 }
