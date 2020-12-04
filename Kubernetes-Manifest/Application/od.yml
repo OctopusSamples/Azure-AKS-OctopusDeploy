@@ -28,6 +28,7 @@ spec:
           value: "database_master_key"
         ports:
         - containerPort: 8080
+        - containerPort: 10943
         volumeMounts:
           - name: tasklogs
             mountPath: /taskLogs
@@ -37,11 +38,20 @@ spec:
             mountPath: /repository
       volumes:
         - name: tasklogs
-          emptyDir: {}
+          azureFile:
+            secretName: azure-secret
+            shareName: tasklogs
+            readOnly: false
         - name: artifacts
-          emptyDir: {}
+          azureFile:
+            secretName: azure-secret          
+            shareName: artifacts
+            readOnly: false
         - name: repository
-          emptyDir: {}
+          azureFile:
+            secretName: azure-secret
+            shareName: artifacts
+            readOnly: false
           
 
 ---

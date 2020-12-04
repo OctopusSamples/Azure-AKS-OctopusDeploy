@@ -1,7 +1,7 @@
 terraform {
   backend "azurerm" {
     resource_group_name  = "MichaelLevanResources"
-    storage_account_name = "odtfstatestorage"
+    storage_account_name = "odstorage92"
     container_name       = "tfstate"
     key                  = "terraform.state"
   }

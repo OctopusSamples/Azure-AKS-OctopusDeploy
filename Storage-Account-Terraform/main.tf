@@ -1,11 +1,9 @@
 provider "azurerm" {
-  version = "<=2.36.0"
-
   features {}
 }
 
 resource "azurerm_storage_account" "od-tfstate-storage" {
-  name = "odtfstatestorage"
+  name = var.storageAccountName
   resource_group_name = var.resourceGroupName
 
   location                 = var.location
@@ -16,5 +14,5 @@ resource "azurerm_storage_account" "od-tfstate-storage" {
 resource "azurerm_storage_container" "od-tfstate-container" {
   name = "tfstate"
   storage_account_name = azurerm_storage_account.od-tfstate-storage.name
-  container_access_type = "blob"
+  container_access_type = "private"
 }
