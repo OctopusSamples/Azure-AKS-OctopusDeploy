@@ -21,11 +21,11 @@ spec:
         - name: ADMIN_USERNAME
           value: "admin"
         - name: ADMIN_PASSWORD
-          value: "OD_Password"
+          value: "SecreTP@assw0rd"
         - name: DB_CONNECTION_STRING
-          value: "Server=tcp:db_name.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=server_username;Password=db_password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+          value: "Server=tcp:octopussqlprod.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=mike;Password=SecreTP@assw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
         - name: MASTER_KEY
-          value: "database_master_key"
+          value: "HWlMQXp3A2guZLdZP1QyQA=="
         ports:
         - containerPort: 8080
         - containerPort: 10943
@@ -36,23 +36,25 @@ spec:
             mountPath: /artifacts
           - name: repository
             mountPath: /repository
+
       volumes:
         - name: tasklogs
           azureFile:
             secretName: azure-secret
             shareName: tasklogs
             readOnly: false
+
         - name: artifacts
-          azureFile:
-            secretName: azure-secret          
-            shareName: artifacts
-            readOnly: false
-        - name: repository
           azureFile:
             secretName: azure-secret
             shareName: artifacts
             readOnly: false
-          
+
+        - name: repository
+          azureFile:
+            secretName: azure-secret
+            shareName: repository
+            readOnly: false
 
 ---
 apiVersion: v1

@@ -21,7 +21,8 @@ az aks get-credentials --name aks_cluster_name --resource-group resource_group_n
 
 Now that the cloud infrastructure is set up, it's time to configure the Azure File Shares for Octopus Deploy to have a place to store persistent data that isn't on the database. To do this, you'll create a few Azure File Shares via Azure CLI, a Kubernetes secret so K8s can authenticate to Azure, and mount the volumes.
 
-7. Run the `storage.ps1` PowerShell script under Kubernetes Manifest --> Persistent-Storage. It connents to the storage account you created in Terraform and creates the File Shares that you need to mount for persistent storage, along with echos out the storage account name and connection key for step 8.
-8. Create a Kubernetes secret by running the following (note: the storage account name and storage account secret are what you receive from the `storage.ps1` output):
+7. Run the `storage.ps1` PowerShell script under Kubernetes Manifest --> Persistent-Storage. It connents to the storage account you created in Terraform and creates the File Shares that you need to mount for persistent storage, along with echos out the storage account name and connection key for step 8
+8. Create a Database Master Secret for Octopus Deploy to have the ability to run mulitple replicas: `openssl rand 16 | base64`
+9. Create a Kubernetes secret by running the following (note: the storage account name and storage account secret are what you receive from the `storage.ps1` output):
 `kubectl create secret generic azure-secret --from-literal=azurestorageaccountname=storage_account_name --from-literal=azurestorageaccountkey=storage_account_key`
-9. Deploy the Kubernetes manifest that's found in Kubernetes-Manifest --> Application to the AKS cluster
+10. Deploy the Kubernetes manifest that's found in Kubernetes-Manifest --> Application to the AKS cluster
