@@ -1,8 +1,8 @@
 # The configuration below creates a storage account for Kubernetes persistent storage.
 # The perisistent storage is used for data in Octopus Deploy that isn't stored in a DB
 
-$AKS_PERS_STORAGE_ACCOUNT_NAME = "odstorage92"
-$AKS_PERS_RESOURCE_GROUP = "MichaelLevanResources"
+$AKS_PERS_STORAGE_ACCOUNT_NAME = ""
+$AKS_PERS_RESOURCE_GROUP = ""
 $AKS_PERS_SHARE_NAME = @(
     "tasklogs",
     "artifacts",
