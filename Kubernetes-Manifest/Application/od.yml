@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: octopusdeploy
-  replicas: 1
+  replicas: 4
   template:
     metadata:
       labels:
@@ -21,11 +21,11 @@ spec:
         - name: ADMIN_USERNAME
           value: "admin"
         - name: ADMIN_PASSWORD
-          value: "SecreTP@assw0rd"
+          value: ""
         - name: DB_CONNECTION_STRING
-          value: "Server=tcp:octopussqlprod.database.windows.net,1433;Initial Catalog=octopusdb;Persist Security Info=False;User ID=mike;Password=SecreTP@assw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+          value: ""
         - name: MASTER_KEY
-          value: "HWlMQXp3A2guZLdZP1QyQA=="
+          value: ""
         ports:
         - containerPort: 8080
         - containerPort: 10943
